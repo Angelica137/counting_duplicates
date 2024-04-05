@@ -1,13 +1,9 @@
+from collections import Counter
+
+
 def duplicate_count(text: str) -> int:
-    count = {}
-    for char in text:
-        char_lower = char.lower()
-        if char_lower in count:
-            count[char_lower] += 1
-        else:
-            count[char_lower] = 1
-    unique_chars_count = 0
-    for key in count:
-        if count[key] != 1:
-            unique_chars_count += 1
-    return unique_chars_count
+    # Create a Counter for all characters in the text
+    char_counts = Counter(text.lower())
+    # Count how many characters have a count greater than one
+    duplicates = sum(1 for char, count in char_counts.items() if count > 1)
+    return duplicates
